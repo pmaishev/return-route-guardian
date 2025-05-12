@@ -16,7 +16,8 @@ import {
   Trash2, 
   Package, 
   AlertCircle, 
-  Check
+  Check,
+  Image as ImageIcon
 } from "lucide-react";
 import { toast } from "sonner";
 import { 
@@ -29,6 +30,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Textarea } from "@/components/ui/textarea";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
 
 interface ReturnItemProps {
   item: ReturnItemType;
@@ -89,24 +91,44 @@ export const ReturnItem = ({ item, onDecisionMade }: ReturnItemProps) => {
         </div>
       </CardHeader>
       <CardContent>
-        <div className="grid grid-cols-2 gap-4 my-2">
-          <div>
-            <p className="text-sm text-gray-500">Customer</p>
-            <p className="font-medium">{item.customerName}</p>
+        <div className="flex flex-col md:flex-row gap-4">
+          <div className="w-full md:w-1/3 rounded-md overflow-hidden border">
+            <AspectRatio ratio={1 / 1}>
+              {item.productImage ? (
+                <img 
+                  src={item.productImage} 
+                  alt={item.productName}
+                  className="object-cover w-full h-full"
+                />
+              ) : (
+                <div className="w-full h-full flex items-center justify-center bg-muted">
+                  <ImageIcon className="h-8 w-8 text-muted-foreground opacity-50" />
+                  <span className="sr-only">No image available</span>
+                </div>
+              )}
+            </AspectRatio>
           </div>
-          <div>
-            <p className="text-sm text-gray-500">Return Date</p>
-            <p className="font-medium">{item.returnDate}</p>
-          </div>
-          <div>
-            <p className="text-sm text-gray-500">Reason for Return</p>
-            <p className="font-medium">{item.returnReason}</p>
-          </div>
-          <div>
-            <p className="text-sm text-gray-500">Condition</p>
-            <Badge variant="outline" className={conditionColor[item.condition]}>
-              {item.condition.toUpperCase()}
-            </Badge>
+          <div className="w-full md:w-2/3">
+            <div className="grid grid-cols-2 gap-4 my-2">
+              <div>
+                <p className="text-sm text-gray-500">Customer</p>
+                <p className="font-medium">{item.customerName}</p>
+              </div>
+              <div>
+                <p className="text-sm text-gray-500">Return Date</p>
+                <p className="font-medium">{item.returnDate}</p>
+              </div>
+              <div>
+                <p className="text-sm text-gray-500">Reason for Return</p>
+                <p className="font-medium">{item.returnReason}</p>
+              </div>
+              <div>
+                <p className="text-sm text-gray-500">Condition</p>
+                <Badge variant="outline" className={conditionColor[item.condition]}>
+                  {item.condition.toUpperCase()}
+                </Badge>
+              </div>
+            </div>
           </div>
         </div>
       </CardContent>

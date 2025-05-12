@@ -15,6 +15,7 @@ export interface ReturnItem {
   returnDate: string;
   status: "in_transit" | "received" | "processed";
   condition: "new" | "used" | "damaged";
+  productImage?: string; // Added product image URL
 }
 
 export type AuthContextType = {

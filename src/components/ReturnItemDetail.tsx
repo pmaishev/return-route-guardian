@@ -4,10 +4,10 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { useState } from "react";
-import { Package, ArrowLeft, Trash2 } from "lucide-react";
+import { Package, ArrowLeft, Trash2, Image as ImageIcon } from "lucide-react";
 import { SheetClose } from "@/components/ui/sheet";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
+import { Card, CardContent } from "@/components/ui/card";
 
 interface ReturnItemDetailProps {
   item: ReturnItem;
@@ -40,17 +40,38 @@ const ReturnItemDetail = ({ item, onDecisionMade, onClose }: ReturnItemDetailPro
   return (
     <div className="pt-6">
       <div className="space-y-6">
-        <div>
-          <h3 className="text-2xl font-semibold">{item.productName}</h3>
-          <div className="text-muted-foreground text-sm">SKU: {item.sku}</div>
-          <div className="text-muted-foreground text-sm">Order: {item.orderId}</div>
-          <div className="flex gap-2 mt-2">
-            <Badge variant="outline" className={statusColor[item.status]}>
-              {item.status.replace("_", " ").toUpperCase()}
-            </Badge>
-            <Badge variant="outline" className={conditionColor[item.condition]}>
-              {item.condition.toUpperCase()}
-            </Badge>
+        <div className="flex flex-col md:flex-row gap-4">
+          {/* Product Image */}
+          <div className="w-full md:w-1/3 rounded-md overflow-hidden border">
+            <AspectRatio ratio={1 / 1}>
+              {item.productImage ? (
+                <img 
+                  src={item.productImage} 
+                  alt={item.productName}
+                  className="object-cover w-full h-full"
+                />
+              ) : (
+                <div className="w-full h-full flex items-center justify-center bg-muted">
+                  <ImageIcon className="h-12 w-12 text-muted-foreground opacity-50" />
+                  <span className="sr-only">No image available</span>
+                </div>
+              )}
+            </AspectRatio>
+          </div>
+
+          {/* Product Details */}
+          <div className="w-full md:w-2/3">
+            <h3 className="text-2xl font-semibold">{item.productName}</h3>
+            <div className="text-muted-foreground text-sm">SKU: {item.sku}</div>
+            <div className="text-muted-foreground text-sm">Order: {item.orderId}</div>
+            <div className="flex gap-2 mt-2">
+              <Badge variant="outline" className={statusColor[item.status]}>
+                {item.status.replace("_", " ").toUpperCase()}
+              </Badge>
+              <Badge variant="outline" className={conditionColor[item.condition]}>
+                {item.condition.toUpperCase()}
+              </Badge>
+            </div>
           </div>
         </div>
 
