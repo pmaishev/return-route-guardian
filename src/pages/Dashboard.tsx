@@ -28,9 +28,11 @@ const Dashboard = () => {
   };
 
   const countByCondition = {
-    new: returnItems.filter(item => item.condition === "new").length,
-    used: returnItems.filter(item => item.condition === "used").length,
-    damaged: returnItems.filter(item => item.condition === "damaged").length,
+    unknown: returnItems.filter(item => item.condition === "unknown").length,
+    intactGoods: returnItems.filter(item => item.condition === "intactGoods").length,
+    semiDefective: returnItems.filter(item => item.condition === "semiDefective").length,
+    defective: returnItems.filter(item => item.condition === "defective").length,
+    wrongVersion: returnItems.filter(item => item.condition === "wrongVersion").length,
   };
 
   const statusData = [
@@ -40,9 +42,11 @@ const Dashboard = () => {
   ];
 
   const conditionData = [
-    { name: 'New', value: countByCondition.new },
-    { name: 'Used', value: countByCondition.used },
-    { name: 'Damaged', value: countByCondition.damaged },
+    { name: 'Unknown', value: countByCondition.unknown },
+    { name: 'Intact Goods', value: countByCondition.intactGoods },
+    { name: 'Semi Defective', value: countByCondition.semiDefective },
+    { name: 'Defective', value: countByCondition.defective },
+    { name: 'Wrong Version', value: countByCondition.wrongVersion },
   ];
 
   return (
@@ -149,7 +153,7 @@ function getMockData(): ReturnItem[] {
       returnReason: "Defective product",
       returnDate: "2023-05-01",
       status: "in_transit",
-      condition: "damaged"
+      condition: "defective"
     },
     {
       id: "2",
@@ -160,7 +164,7 @@ function getMockData(): ReturnItem[] {
       returnReason: "Wrong item received",
       returnDate: "2023-05-03",
       status: "received",
-      condition: "new"
+      condition: "intactGoods"
     },
     {
       id: "3",
@@ -171,7 +175,7 @@ function getMockData(): ReturnItem[] {
       returnReason: "Changed mind",
       returnDate: "2023-05-05",
       status: "processed",
-      condition: "used"
+      condition: "semiDefective"
     },
     {
       id: "4",
@@ -182,7 +186,7 @@ function getMockData(): ReturnItem[] {
       returnReason: "No longer needed",
       returnDate: "2023-05-07",
       status: "in_transit",
-      condition: "new"
+      condition: "intactGoods"
     },
     {
       id: "5",
@@ -193,7 +197,7 @@ function getMockData(): ReturnItem[] {
       returnReason: "Not as described",
       returnDate: "2023-05-09",
       status: "received",
-      condition: "used"
+      condition: "semiDefective"
     },
     {
       id: "6",
@@ -204,7 +208,7 @@ function getMockData(): ReturnItem[] {
       returnReason: "Defective product",
       returnDate: "2023-05-11",
       status: "processed",
-      condition: "damaged"
+      condition: "defective"
     },
     {
       id: "7",
@@ -215,7 +219,7 @@ function getMockData(): ReturnItem[] {
       returnReason: "Wrong color",
       returnDate: "2023-05-13",
       status: "in_transit",
-      condition: "new"
+      condition: "intactGoods"
     }
   ];
 }
