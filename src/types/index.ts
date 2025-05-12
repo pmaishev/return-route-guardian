@@ -14,8 +14,8 @@ export interface ReturnItem {
   returnReason: string;
   returnDate: string;
   status: "in_transit" | "received" | "processed";
-  condition: "new" | "used" | "damaged";
-  productImage?: string; // Added product image URL
+  condition: "unknown" | "intactGoods" | "semiDefective" | "defective" | "wrongVersion";
+  productImage?: string;
 }
 
 export type AuthContextType = {

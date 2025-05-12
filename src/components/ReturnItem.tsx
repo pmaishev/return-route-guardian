@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { 
   Card, 
@@ -49,9 +48,24 @@ export const ReturnItem = ({ item, onDecisionMade }: ReturnItemProps) => {
   };
 
   const conditionColor = {
-    new: "bg-green-100 text-green-800 border-green-200",
-    used: "bg-blue-100 text-blue-800 border-blue-200",
-    damaged: "bg-red-100 text-red-800 border-red-200",
+    unknown: "bg-gray-100 text-gray-800 border-gray-200",
+    intactGoods: "bg-green-100 text-green-800 border-green-200",
+    semiDefective: "bg-yellow-100 text-yellow-800 border-yellow-200",
+    defective: "bg-red-100 text-red-800 border-red-200",
+    wrongVersion: "bg-blue-100 text-blue-800 border-blue-200"
+  };
+
+  const formatCondition = (condition: string): string => {
+    switch (condition) {
+      case "intactGoods":
+        return "INTACT GOODS";
+      case "semiDefective":
+        return "SEMI DEFECTIVE";
+      case "wrongVersion":
+        return "WRONG VERSION";
+      default:
+        return condition.toUpperCase();
+    }
   };
 
   const handleDecisionConfirm = () => {
@@ -125,7 +139,7 @@ export const ReturnItem = ({ item, onDecisionMade }: ReturnItemProps) => {
               <div>
                 <p className="text-sm text-gray-500">Condition</p>
                 <Badge variant="outline" className={conditionColor[item.condition]}>
-                  {item.condition.toUpperCase()}
+                  {formatCondition(item.condition)}
                 </Badge>
               </div>
             </div>

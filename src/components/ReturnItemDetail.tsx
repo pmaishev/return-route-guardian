@@ -1,4 +1,3 @@
-
 import { ReturnItem, Decision } from "@/types";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -20,9 +19,11 @@ const ReturnItemDetail = ({ item, onDecisionMade, onClose }: ReturnItemDetailPro
   const [notes, setNotes] = useState("");
 
   const conditionColor = {
-    new: "bg-green-100 text-green-800 border-green-200",
-    used: "bg-blue-100 text-blue-800 border-blue-200",
-    damaged: "bg-red-100 text-red-800 border-red-200",
+    unknown: "bg-gray-100 text-gray-800 border-gray-200",
+    intactGoods: "bg-green-100 text-green-800 border-green-200",
+    semiDefective: "bg-yellow-100 text-yellow-800 border-yellow-200",
+    defective: "bg-red-100 text-red-800 border-red-200",
+    wrongVersion: "bg-blue-100 text-blue-800 border-blue-200"
   };
 
   const statusColor = {
@@ -69,7 +70,10 @@ const ReturnItemDetail = ({ item, onDecisionMade, onClose }: ReturnItemDetailPro
                 {item.status.replace("_", " ").toUpperCase()}
               </Badge>
               <Badge variant="outline" className={conditionColor[item.condition]}>
-                {item.condition.toUpperCase()}
+                {item.condition === "intactGoods" ? "INTACT GOODS" : 
+                 item.condition === "semiDefective" ? "SEMI DEFECTIVE" : 
+                 item.condition === "wrongVersion" ? "WRONG VERSION" : 
+                 item.condition.toUpperCase()}
               </Badge>
             </div>
           </div>
