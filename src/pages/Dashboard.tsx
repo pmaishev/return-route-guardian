@@ -35,6 +35,7 @@ const Dashboard = () => {
     wrongVersion: returnItems.filter(item => item.condition === "wrongVersion").length,
   };
 
+  // Format the data for the charts
   const statusData = [
     { name: 'In Transit', value: countByStatus.in_transit },
     { name: 'Received', value: countByStatus.received },
@@ -219,7 +220,7 @@ function getMockData(): ReturnItem[] {
       returnReason: "Wrong color",
       returnDate: "2023-05-13",
       status: "in_transit",
-      condition: "intactGoods"
+      condition: "wrongVersion"
     }
   ];
 }
